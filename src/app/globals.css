@@ -1,0 +1,501 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Epitome Design System
+
+   Two sources, kept in their lanes:
+   — Mintlify supplies the DISCIPLINE: white canvas, near-total monochrome,
+     one accent used as punctuation, 1200px measure, 80px section rhythm,
+     16px cards, 4px controls, barely-visible shadows.
+   — Epitome supplies the IDENTITY: the Indigo/Violet/Orchid/Magenta palette,
+     the Rise and Span gradients, Bitter for the wordmark, Work Sans for
+     everything else, IBM Plex Mono for figures.
+
+   The accent here is Violet Core, not Mintlify's green. The gradients appear
+   only where the identity system sanctions them — the mark, the capsule, and
+   wide section rules. Never on letterforms.
+   ========================================================================== */
+
+@theme {
+  /* --- Brand palette ----------------------------------------------------
+     Values are the identity system's own. Roles below are the web
+     application of them.
+     -------------------------------------------------------------------- */
+  --color-indigo-ink: #1b0b3a;
+  --color-violet-core: #4b23e8;
+  --color-orchid-mid: #8b27c4;
+  --color-magenta-edge: #d42a8e;
+  --color-amber-signal: #ffb36b;
+  --color-slate-quill: #6b6480;
+
+  --color-paper-white: #ffffff;
+  --color-mist-gray: #f2f2f2;
+  --color-cloud-gray: #dddddd;
+
+  /* Text tiers, all drawn from the brand rather than from neutral greys.
+     Contrast on paper: 18.2:1 / 7.7:1 / 5.6:1 — the subtle tier still
+     clears 4.5:1 on the mist-gray bands, which is where captions sit. */
+  --color-ink: #1b0b3a;
+  --color-ink-muted: #55506b;
+  --color-ink-subtle: #6b6480;
+
+  /* Violet Core reaches 7.8:1 on paper, so the accent needs no darker cut
+     for text — unusual, and worth using. */
+  --color-violet-wash: #f4f2fe;
+
+  /* Tints for the Indigo Ink bands — 8.8:1 and 5.2:1 against #1b0b3a */
+  --color-ink-on-dark: #b7b1c9;
+  --color-ink-on-dark-subtle: #8d85a4;
+
+  /* --- Gradients --------------------------------------------------------
+     Rise for anything roughly square, Span for anything wider than 2:1.
+     The midpoint is held past centre at 55% deliberately — at 50% the
+     magenta half reads visually larger.
+     -------------------------------------------------------------------- */
+  --gradient-rise: linear-gradient(
+    45deg,
+    #4b23e8 0%,
+    #8b27c4 55%,
+    #d42a8e 100%
+  );
+  --gradient-span: linear-gradient(
+    82deg,
+    #4b23e8 0%,
+    #8b27c4 55%,
+    #d42a8e 100%
+  );
+
+  /* --- Typography -------------------------------------------------------
+     Bitter is the wordmark only. Work Sans carries headlines, interface and
+     body. IBM Plex Mono carries figures, codes and specifications.
+     -------------------------------------------------------------------- */
+  --font-wordmark: var(--font-bitter), ui-serif, Georgia, "Times New Roman",
+    serif;
+  --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", SFMono-Regular,
+    Menlo, monospace;
+
+  --text-caption: 13px;
+  --text-caption--line-height: 1.5;
+
+  --text-body: 16px;
+  --text-body--line-height: 1.5;
+  --text-body--letter-spacing: -0.01em;
+
+  --text-subheading: 20px;
+  --text-subheading--line-height: 1.3;
+  --text-subheading--letter-spacing: -0.01em;
+
+  --text-heading-sm: 24px;
+  --text-heading-sm--line-height: 1.33;
+  --text-heading-sm--letter-spacing: -0.015em;
+
+  --text-heading: 40px;
+  --text-heading--line-height: 1.15;
+  --text-heading--letter-spacing: -0.02em;
+
+  --text-display: 57px;
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.025em;
+
+  /* --- Spacing ---------------------------------------------------------
+     The default fluid rem scale is removed so every spacing utility resolves
+     to an explicit, reviewed pixel value. Unlisted steps do not exist, which
+     keeps arbitrary spacing out of components.
+     -------------------------------------------------------------------- */
+  --spacing: initial;
+  --spacing-0: 0px;
+  --spacing-1: 1px;
+  --spacing-2: 2px;
+  --spacing-3: 3px;
+  --spacing-4: 4px;
+  --spacing-5: 5px;
+  --spacing-6: 6px;
+  --spacing-7: 7px;
+  --spacing-8: 8px;
+  --spacing-10: 10px;
+  --spacing-12: 12px;
+  --spacing-14: 14px;
+  --spacing-16: 16px;
+  --spacing-18: 18px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-28: 28px;
+  --spacing-32: 32px;
+  --spacing-36: 36px;
+  --spacing-40: 40px;
+  --spacing-44: 44px;
+  --spacing-48: 48px;
+  --spacing-56: 56px;
+  --spacing-64: 64px;
+  --spacing-72: 72px;
+  --spacing-80: 80px;
+  --spacing-88: 88px;
+  --spacing-96: 96px;
+  --spacing-112: 112px;
+  --spacing-120: 120px;
+  --spacing-128: 128px;
+  --spacing-160: 160px;
+  --spacing-201: 201px;
+  --spacing-240: 240px;
+  --spacing-320: 320px;
+  --spacing-420: 420px;
+  --spacing-560: 560px;
+
+  /* --- Radius ----------------------------------------------------------- */
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+
+  /* --- Elevation (deliberately barely there) ---------------------------- */
+  --shadow-subtle: 0 2px 4px rgba(27, 11, 58, 0.03);
+  --shadow-raised: 0 2px 4px rgba(27, 11, 58, 0.05);
+  --shadow-control: 0 1px 2px rgba(27, 11, 58, 0.1);
+
+  /* --- Layout ----------------------------------------------------------- */
+  --page-max-width: 1200px;
+
+  /* --- Motion ----------------------------------------------------------- */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  * {
+    border-color: var(--color-mist-gray);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    /* `clip`, not `hidden`: `overflow-x: hidden` promotes the element to a
+       scroll container, which stops scroll events reaching `window` and
+       silently kills anything listening for them (the header's scroll state,
+       for one). `clip` guards against horizontal overflow without that. */
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--color-paper-white);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-violet-core);
+    color: var(--color-paper-white);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-violet-core);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+/* ==========================================================================
+   Type utilities — so components never hand-roll size + weight + tracking.
+   ========================================================================== */
+
+@utility type-display {
+  font-family: var(--font-sans);
+  font-size: var(--text-display);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+@utility type-heading {
+  font-family: var(--font-sans);
+  font-size: var(--text-heading);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+@utility type-heading-sm {
+  font-family: var(--font-sans);
+  font-size: var(--text-heading-sm);
+  line-height: 1.33;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+}
+
+@utility type-subheading {
+  font-size: var(--text-subheading);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+
+@utility type-body {
+  font-size: var(--text-body);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+@utility type-caption {
+  font-size: var(--text-caption);
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+/* Small-caps label. The identity system tracks these at +120/1000. */
+@utility type-label {
+  font-size: var(--text-caption);
+  line-height: 1.5;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* The logo descriptor lock-up: Work Sans 500 at +340/1000. */
+@utility type-descriptor {
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.34em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* IBM Plex Mono carries every figure, code and specification. */
+@utility numeric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   Brand surfaces
+   ========================================================================== */
+
+/* Rise · 45° — the mark, badges, avatars, favicons: anything roughly square. */
+@utility bg-rise {
+  background-image: var(--gradient-rise);
+}
+
+/* Span · 82° — the capsule, banners, section rules: anything wider than 2:1. */
+@utility bg-span {
+  background-image: var(--gradient-span);
+}
+
+/* ==========================================================================
+   Responsive type ramp — headline sizes step down so small viewports never
+   inherit desktop display sizing.
+   ========================================================================== */
+
+@media (max-width: 1023px) {
+  .type-display {
+    font-size: 44px;
+    line-height: 1.08;
+  }
+  .type-heading {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 639px) {
+  .type-display {
+    font-size: 34px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+  .type-heading {
+    font-size: 27px;
+    letter-spacing: -0.015em;
+  }
+  .type-heading-sm {
+    font-size: 20px;
+  }
+  .type-subheading {
+    font-size: 17px;
+  }
+  .type-label {
+    letter-spacing: 0.1em;
+  }
+}
+
+/* ==========================================================================
+   Motion — entrance choreography. All of it collapses under
+   prefers-reduced-motion.
+   ========================================================================== */
+
+@keyframes epi-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes epi-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes epi-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes epi-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+.epi-rise {
+  animation: epi-rise 0.62s var(--ease-out-quint) both;
+}
+
+.epi-fade {
+  animation: epi-fade 0.7s var(--ease-out-quint) both;
+}
+
+/* Scroll reveal: set by the Reveal component via IntersectionObserver */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s var(--ease-out-quint),
+    transform 0.6s var(--ease-out-quint);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal="shown"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Diagram primitives -------------------------------------------------
+   Connector paths carry pathLength="100", so dash values are percentages of
+   the path regardless of its real length. That keeps the draw-in and the
+   travelling pulse at a consistent speed across paths of different lengths.
+   ----------------------------------------------------------------------- */
+
+.epi-line {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: epi-draw 0.9s var(--ease-out-quint) both;
+}
+
+.epi-flow {
+  stroke-dasharray: 7 93;
+  stroke-dashoffset: 0;
+  animation: epi-flow 3.6s linear infinite;
+}
+
+@keyframes epi-flow {
+  from {
+    stroke-dashoffset: 7;
+  }
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+.epi-flow-y {
+  animation: epi-flow-y 2.6s linear infinite;
+}
+
+@keyframes epi-flow-y {
+  from {
+    transform: translateY(-8px);
+  }
+  to {
+    transform: translateY(24px);
+  }
+}
+
+.epi-dot {
+  animation: epi-pulse 2.4s var(--ease-out-quint) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Looping motion is removed outright rather than sped to zero, which would
+     leave the pulse frozen mid-path. */
+  .epi-flow,
+  .epi-flow-y,
+  .epi-dot {
+    animation: none !important;
+  }
+
+  .epi-flow {
+    opacity: 0;
+  }
+
+  .epi-line {
+    stroke-dashoffset: 0;
+  }
+}
